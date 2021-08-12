@@ -25,7 +25,8 @@ function Human(name, species, weight, height, diet, position) {
 
 const AnimalData = [];
 const DinoDataRaw = JSON.parse(DINO_DATA_JSON);
-DinoDataRaw.Dinos.forEach((dino) => {
+const randomArray = getRandomNumberArray(8);
+DinoDataRaw.Dinos.forEach((dino, index) => {
   AnimalData.push(
     new Dinosaur(
       dino.species,
@@ -35,12 +36,11 @@ DinoDataRaw.Dinos.forEach((dino) => {
       dino.where,
       dino.when,
       dino.fact,
-      getRandomNumberArray(DinoDataRaw.Dinos.length) 
-      // 4
+      randomArray[index]
     )
   );
 });
-console.log(DinoDataRaw.Dinos.length);
+
 // Create Human Object
 const person = new Human();
 
@@ -56,6 +56,7 @@ const dietField = document.getElementById("diet");
 
 compareButton.addEventListener(
   "click", (() => {
+    console.log("TEST: " + DinoDataRaw.Dinos.length);
     return () => {
       person.name = fullNameField.value;
       person.species = "Human";
@@ -89,12 +90,16 @@ console.log(AnimalData);
 // On button click, prepare and display infographic
 
 
-// Helper functions
+// // Helper functions
 function getRandomNumberArray(size) {
   // Source: https://stackoverflow.com/a/2380113
+  size++;
   var arr = [];
   while(arr.length < size){
-      var r = Math.floor(Math.random() * 100) + 1;
-      if(arr.indexOf(r) === -1 && arr.indexOf(humanTilePosition) === -1) arr.push(r);
+      var r = Math.floor(Math.random() * size);
+      if(arr.indexOf(r) === -1) arr.push(r);
   }
+  humanTilePositionIndex = arr.indexOf(humanTilePosition)
+  if(humanTilePositionIndex !== -1) arr.splice(humanTilePositionIndex, 1)
+  return arr
 }
