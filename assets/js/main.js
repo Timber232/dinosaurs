@@ -1,41 +1,75 @@
 // Create Dino Constructor
-function Animal(species, weight, height, diet, where, when, fact) {
+const humanTilePosition = 4;
+
+function Animal(species, weight, height, diet, position) {
   this.species = species;
   this.weight = weight;
   this.height = height;
   this.diet = diet;
+  this.position = position;
+}
+
+function Dinosaur(species, weight, height, diet, where, when, fact, position) {
+  Animal.call(this, species, weight, height, diet, position);
   this.where = where;
   this.when = when;
   this.fact = fact;
 }
 
+function Human(name, species, weight, height, diet, position) {
+  Animal.call(this, species, weight, height, diet, position);
+  this.name = name;
+}
+
 // Create Dino Objects
+
 const AnimalData = [];
 const DinoDataRaw = JSON.parse(DINO_DATA_JSON);
 DinoDataRaw.Dinos.forEach((dino) => {
   AnimalData.push(
-    new Animal(
+    new Dinosaur(
       dino.species,
       dino.weight,
       dino.height,
       dino.diet,
       dino.where,
       dino.when,
-      dino.fact
+      dino.fact,
+      getRandomNumberArray(DinoDataRaw.Dinos.length) 
+      // 4
     )
   );
 });
-
+console.log(DinoDataRaw.Dinos.length);
 // Create Human Object
-function Human(name, species, weight, height, diet, where, when, fact) {
-  Animal.call(this, species, weight, height, diet, where, when, fact)
-  this.name = name;
-}
-
 const person = new Human();
 
 // Use IIFE to get human data from form
+// Compare button
+const compareButton = document.getElementById("compare-button");
+// Rest of the form
+const fullNameField = document.getElementById("name");
+const heightFeetField = document.getElementById("height-feet");
+const heightInchesField = document.getElementById("height-inches");
+const weightLbsField = document.getElementById("weight-lbs");
+const dietField = document.getElementById("diet");
 
+compareButton.addEventListener(
+  "click", (() => {
+    return () => {
+      person.name = fullNameField.value;
+      person.species = "Human";
+      person.weight = weightLbsField.value;
+      person.height = (heightFeetField.value * 12) + heightInchesField.value;
+      person.diet = dietField.value;
+      person.position = humanTilePosition;
+    }
+  })()
+);
+
+AnimalData.push(person);
+
+console.log(AnimalData);
 
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
@@ -53,3 +87,14 @@ const person = new Human();
 // Remove form from screen
 
 // On button click, prepare and display infographic
+
+
+// Helper functions
+function getRandomNumberArray(size) {
+  // Source: https://stackoverflow.com/a/2380113
+  var arr = [];
+  while(arr.length < size){
+      var r = Math.floor(Math.random() * 100) + 1;
+      if(arr.indexOf(r) === -1 && arr.indexOf(humanTilePosition) === -1) arr.push(r);
+  }
+}

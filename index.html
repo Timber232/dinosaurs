@@ -1,84 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dinosaurs</title>
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <script defer src="assets/data/dino.js"></script>
+    <script defer src="assets/js/main.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dinosaurs</title>
-  <link rel="stylesheet" href="assets/css/tailwind.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <script defer src="assets/data/dino.js"></script>
-  <script defer src="assets/js/main.js"></script>
-</head>
-
-<body class="bg-gray-800">
-  <!-- Heading -->
-  <div class="container mx-auto">
-    <header class="text-center my-10 text-green-50">
-      <h2 class="text-2xl">Natural History Museum</h2>
-      <h1 class="text-7xl m-6">Dinosaurs</h1>
-      <h3>How do you compare?</h3>
-    </header>
-  </div>
-
-  <!-- Form -->
-  <div class="max-w-md grid-cols-1 mx-auto bg-gray-600 rounded-lg">
-    <div class="p-5">
-      <form action="post">
-        <!-- Form Grid -->
-        <div class="grid grid-cols-1 gap-6">
-          <!-- Name -->
-          <label class="block">
-            <span class="text-gray-50">Full name:</span>
-            <input type="text" class="mt-1 block w-full rounded-lg" placeholder="Name">
-          </label>
-          <!-- Height -->
-          <div class="grid grid-cols-5 gap-6">
-            <label class="block pt-3">
-              <span class="text-gray-50">Height:</span>
-            </label>
-            <!-- Feet -->
-            <label class="block col-span-2">
-              <input type="number" class="mt-1 block w-full rounded-lg" placeholder="Feet">
-            </label>
-            <!-- Inches -->
-            <label class="block col-span-2">
-              <input type="number" class="mt-1 block w-full rounded-lg" placeholder="Inches">
-            </label>
-          </div>
-          <!-- Weight -->
-          <div class="grid grid-cols-1 gap-6">
-            <label class="block">
-              <span class="text-gray-50">Weight:</span>
-              <input type="number" class="mt-1 block w-full rounded-lg" placeholder="Lbs">
-            </label>
-          </div>
-          <!-- Diet -->
-          <div class="grid grid-cols-1 gap-6">
-            <label class="block">
-              <span class="text-gray-50">Diet:</span>
-              <select class="block w-full mt-1 rounded-lg">
-                <option>Herbivore</option>
-                <option>Omnivore</option>
-                <option>Carnivore</option>
-              </select>
-            </label>
-          </div>
-          <!-- Compare Button -->
-          <div class="grid grid-cols-1 gap-6">
-            <button class="bg-gray-900 text-gray-50 p-4 rounded-lg shadow-lg">Compare Me!</button>
-          </div>
-        </div>
-      </form>
+  <body class="bg-gray-800">
+    <!-- Heading -->
+    <div class="container mx-auto">
+      <header class="text-center my-10 text-green-50">
+        <h2 class="text-2xl">Natural History Museum</h2>
+        <h1 class="text-7xl m-6">Dinosaurs</h1>
+        <h3>How do you compare?</h3>
+      </header>
     </div>
-  </div>
 
-  <footer class="container mx-auto mt-14">
-    <!-- Include information source -->
-    <p class="italic font-light text-center text-gray-50 text-sm">
-      Data Sourced from <a href="https://www.wikipedia.org/" class="text-blue-400">Wikipedia.org</a>, all numbers are approximations.
-    </p>
-  </footer>
-</body>
+    <!-- Form -->
+    <div class="max-w-md grid-cols-1 mx-auto bg-gray-600 rounded-lg">
+      <div class="p-5">
+        <form action="post">
+          <!-- Form Grid -->
+          <div class="grid grid-cols-1 gap-6">
+            <!-- Name -->
+            <label class="block">
+              <span class="text-gray-50">Full name:</span>
+              <input
+                type="text"
+                class="mt-1 block w-full rounded-lg"
+                id="name"
+                name="name"
+                placeholder="Name"
+              />
+            </label>
+            <!-- Height -->
+            <div class="grid grid-cols-5 gap-6">
+              <label class="block pt-3">
+                <span class="text-gray-50">Height:</span>
+              </label>
+              <!-- Feet -->
+              <label class="block col-span-2">
+                <input
+                  type="number"
+                  class="mt-1 block w-full rounded-lg"
+                  id="height-feet"
+                  name="height-feet"
+                  placeholder="Feet"
+                />
+              </label>
+              <!-- Inches -->
+              <label class="block col-span-2">
+                <input
+                  type="number"
+                  class="mt-1 block w-full rounded-lg"
+                  id="height-inches"
+                  name="height-inches"
+                  placeholder="Inches"
+                />
+              </label>
+            </div>
+            <!-- Weight -->
+            <div class="grid grid-cols-1 gap-6">
+              <label class="block">
+                <span class="text-gray-50">Weight:</span>
+                <input
+                  type="number"
+                  class="mt-1 block w-full rounded-lg"
+                  id="weight-lbs"
+                  name="weight-lbs"
+                  placeholder="Lbs"
+                />
+              </label>
+            </div>
+            <!-- Diet -->
+            <div class="grid grid-cols-1 gap-6">
+              <label class="block">
+                <span class="text-gray-50">Diet:</span>
+                <select class="block w-full mt-1 rounded-lg" 
+                  id="diet" name="diet">
+                  <option value="Herbivore">Herbivore</option>
+                  <option value="Omnivore">Omnivore</option>
+                  <option value="Carnivore">Carnivore</option>
+                </select>
+              </label>
+            </div>
+            <!-- Compare Button -->
+            <div class="grid grid-cols-1 gap-6">
+              <button
+                type="button"
+                id="compare-button"
+                class="bg-gray-900 text-gray-50 p-4 rounded-lg shadow-lg"
+              >
+                Compare Me!
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 
+    <footer class="container mx-auto mt-14">
+      <!-- Include information source -->
+      <p class="italic font-light text-center text-gray-50 text-sm">
+        Data Sourced from
+        <a href="https://www.wikipedia.org/" class="text-blue-400"
+          >Wikipedia.org</a
+        >, all numbers are approximations.
+      </p>
+    </footer>
+  </body>
 </html>
