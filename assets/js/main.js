@@ -108,7 +108,7 @@ const compareFunctions = [
     const weightDiff = Math.abs(dino.weight - human.weight);
     const heavierOrLighter = human.weight < dino.weight ? "lighter" : "heavier";
     console.log(human.weight + ": " + dino.weight + ", human is " + heavierOrLighter + " than dino");
-    return `${human.name} is ${weightDiff} pounds ${heavierOrLighter} than ${dino.species}`;
+    return `${human.name} is ${weightDiff.toLocaleString()} pounds ${heavierOrLighter} than ${dino.species}`;
   }
 ]
 
@@ -176,5 +176,5 @@ function getRandomNumberArray(size) {
 // Convert inches to foot and inches function
 function inchesToFootAndInches(inches) {
   const foot = inches / 12
-  return `${Math.floor(foot)} feet and ${inches % 12} inches`;
+  return `${Math.floor(foot).toLocaleString()} feet and ${inches % 12} inches`;
 }
