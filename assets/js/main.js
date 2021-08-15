@@ -21,8 +21,7 @@ function Human(name, species, weight, height, diet, position) {
   this.name = name;
 }
 
-// Create Dino Objects
-
+// Create Dino Objects from the json file
 const AnimalData = [];
 const DinoDataRaw = JSON.parse(DINO_DATA_JSON);
 const randomArray = getRandomNumberArray(8);
@@ -41,7 +40,7 @@ DinoDataRaw.Dinos.forEach((dino, index) => {
   );
 });
 
-// Form
+// Form container
 const formContainer = document.getElementById("dino-form-container");
 // Compare button
 const compareButton = document.getElementById("compare-button");
@@ -66,15 +65,21 @@ compareButton.addEventListener(
       person.diet = dietField.value;
       person.position = humanTilePosition;
 
+      // Generate only 8 random numbers, the 9th is the human object that will be added later on
       const shuffledArrayIndex = getRandomNumberArray(7)
+
+      // Remove pigeon from the shuffled array so that it doesn't get compared to human
       pigeonIndex = AnimalData.findIndex((animal) => (animal.species === "Pigeon"));
       pigeonIndex = shuffledArrayIndex.indexOf(pigeonIndex)
       if (pigeonIndex !== -1) shuffledArrayIndex.splice(pigeonIndex, 1)
       shuffledArrayIndex.splice(0, 3);
 
+      // Compare human to each dinosaurs in random order
       shuffledArrayIndex.forEach(function(value, index) {
         AnimalData[value].fact = compareFunctions[index](person, AnimalData[value])
       });
+
+      // Add the human object to the animal array
       AnimalData[originalAnimalLenght] = person;
       formContainer.className = "hidden"
       generateTiles(AnimalData)
@@ -83,19 +88,22 @@ compareButton.addEventListener(
 );
 
 const compareFunctions = [
+  // Compare height between human and dinosaurs
   (human, dino) => {
     const heightDiff = Math.abs(dino.height - human.height);
     const tallerOrShorter = human.height < dino.height ? "shorter" : "taller";
     return `${human.name} is ${inchesToFootAndInches(heightDiff)} ${tallerOrShorter} than ${dino.species}`;
   },
-  function compareDiet(human, dino) {
+  // Compare diet between human and dinosaurs
+  (human, dino) => {
     if (human.diet.toLowerCase() !== dino.diet.toLowerCase()) {
       return `${human.name}'s diet is ${human.diet.toLowerCase()} and ${dino.species} diet is ${dino.diet.toLowerCase()}`
     } else {
       return `${human.name}'s diet is the same as ${dino.species}'s diet, which is ${dino.diet}`;
     }
   },
-  function compareWeight(human, dino) {
+  // Compare weight between human and dinosaurs
+  (human, dino) => {
     const weightDiff = Math.abs(dino.weight - human.weight);
     const heavierOrLighter = human.weight < dino.weight ? "lighter" : "heavier";
     console.log(human.weight + ": " + dino.weight + ", human is " + heavierOrLighter + " than dino");
@@ -103,6 +111,7 @@ const compareFunctions = [
   }
 ]
 
+// Background colours for each animal grid boxes
 const bgColorClasses = [
   "bg-red-700",
   "bg-blue-700",
@@ -142,9 +151,8 @@ function generateTiles(data) {
     lowerLabel.innerText = data[position].fact;
     gridBox.append(dinoImage, upperLabel);
 
-    if (data[position].fact !== undefined) {
-      gridBox.append(lowerLabel);
-    }
+    // Add lower label to non-human grid box
+    if (data[position].fact !== undefined) gridBox.append(lowerLabel);
     gridFragment.append(gridBox);
   }
   gridElement.append(gridFragment);
@@ -164,8 +172,8 @@ function getRandomNumberArray(size) {
   return arr
 }
 
-// TODO: Complete inches to foot and inches function
+// Convert inches to foot and inches function
 function inchesToFootAndInches(inches) {
-  const foot = inches/12
+  const foot = inches / 12
   return `${Math.floor(foot)} feet and ${inches % 12} inches`;
 }
