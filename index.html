@@ -21,7 +21,7 @@
     </div>
 
     <!-- Form -->
-    <div class="max-w-md grid-cols-1 mx-auto bg-gray-600 rounded-lg">
+    <div class="max-w-md grid-cols-1 mx-auto bg-gray-600 rounded-lg" id="dino-form-container">
       <div class="p-5">
         <form action="post">
           <!-- Form Grid -->
@@ -80,11 +80,11 @@
             <div class="grid grid-cols-1 gap-6">
               <label class="block">
                 <span class="text-gray-50">Diet:</span>
-                <select class="block w-full mt-1 rounded-lg" 
+                <select class="block w-full mt-1 rounded-lg"
                   id="diet" name="diet">
-                  <option value="Herbivore">Herbivore</option>
-                  <option value="Omnivore">Omnivore</option>
-                  <option value="Carnivore">Carnivore</option>
+                  <option value="Herbivor">Herbivor</option>
+                  <option value="Omnivor">Omnivor</option>
+                  <option value="Carnivor">Carnivor</option>
                 </select>
               </label>
             </div>
@@ -100,6 +100,11 @@
             </div>
           </div>
         </form>
+      </div>
+    </div>
+
+    <div class="container mx-auto">
+      <div class="dino-grid-height grid grid-rows-3 grid-flow-col gap-3" id="dino-grid">
       </div>
     </div>
 
