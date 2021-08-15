@@ -41,11 +41,6 @@ DinoDataRaw.Dinos.forEach((dino, index) => {
   );
 });
 
-// Create Human Object
-const person = new Human();
-
-// Use IIFE to get human data from form
-
 // Form
 const formContainer = document.getElementById("dino-form-container");
 // Compare button
@@ -59,6 +54,7 @@ const dietField = document.getElementById("diet");
 //Dino grid
 const gridElement = document.getElementById("dino-grid");
 
+const person = new Human();
 const originalAnimalLenght = AnimalData.length;
 compareButton.addEventListener(
   "click", (() => {
@@ -89,8 +85,8 @@ compareButton.addEventListener(
 const compareFunctions = [
   (human, dino) => {
     const heightDiff = Math.abs(dino.height - human.height);
-    const tallerOrShorter = human.height < dino.height ? "shorter" : "taller"
-    return `${human.name} is ${heightDiff} inches ${tallerOrShorter} than ${dino.species}`;
+    const tallerOrShorter = human.height < dino.height ? "shorter" : "taller";
+    return `${human.name} is ${inchesToFootAndInches(heightDiff)} ${tallerOrShorter} than ${dino.species}`;
   },
   function compareDiet(human, dino) {
     if (human.diet.toLowerCase() !== dino.diet.toLowerCase()) {
@@ -101,7 +97,8 @@ const compareFunctions = [
   },
   function compareWeight(human, dino) {
     const weightDiff = Math.abs(dino.weight - human.weight);
-    const heavierOrLighter = human.weight < dino.weight ? "lighter" : "heavier"
+    const heavierOrLighter = human.weight < dino.weight ? "lighter" : "heavier";
+    console.log(human.weight + ": " + dino.weight + ", human is " + heavierOrLighter + " than dino");
     return `${human.name} is ${weightDiff} pounds ${heavierOrLighter} than ${dino.species}`;
   }
 ]
@@ -145,7 +142,7 @@ function generateTiles(data) {
     lowerLabel.innerText = data[position].fact;
     gridBox.append(dinoImage, upperLabel);
 
-    if(data[position].fact !== undefined) {
+    if (data[position].fact !== undefined) {
       gridBox.append(lowerLabel);
     }
     gridFragment.append(gridBox);
@@ -168,4 +165,7 @@ function getRandomNumberArray(size) {
 }
 
 // TODO: Complete inches to foot and inches function
-function inchesToFootAndInches(inches) {}
+function inchesToFootAndInches(inches) {
+  const foot = inches/12
+  return `${Math.floor(foot)} feet and ${inches % 12} inches`;
+}
