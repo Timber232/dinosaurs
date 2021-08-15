@@ -133,7 +133,7 @@ function generateTiles(data) {
 
     // Dinosaurs image
     const dinoImage = document.createElement("img");
-    dinoImage.setAttribute("src", `../assets/img/${data[position].species.toLowerCase()}.png`);
+    dinoImage.setAttribute("src", `./assets/img/${data[position].species.toLowerCase()}.png`);
     dinoImage.className = "absolute inset-x-0 top-10 bottom-15"
 
     // Grid lower label
