@@ -1,6 +1,7 @@
-// Create Dino Constructor
+// Hardcoded human tile position
 const humanTilePosition = 4;
 
+// Create Dino Constructor
 function Animal(species, weight, height, diet, position) {
   this.species = species;
   this.weight = weight;
